@@ -33,6 +33,14 @@ const videoSchema = new mongoose.Schema(
       default: 0,
     },
     likes: {
+      type: Number,
+      default: 0,
+    },
+    disLikes: {
+      type: Number,
+      default: 0,
+    },
+    likes: {
       type: [mongoose.Schema.Types.ObjectId],
       ref: "User",
       default: [],
@@ -50,6 +58,10 @@ const videoSchema = new mongoose.Schema(
     tags: {
       type: [String],
       default: [],
+    },
+    shorts: {
+      type: Boolean,
+      default: false,
     },
   },
   { timestamps: true }

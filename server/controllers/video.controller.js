@@ -1,37 +1,24 @@
 import Video from "../models/video.model.js";
-import cloudinary from "../utils/cloudinary.js";
 
 export const createVideo = async (req, res) => {
-  const { title, description, videoFile, videoImageFile, tags } = req.body;
+  const { title, description, videoUrl, videoImage, tags, duration, shorts } =
+    req.body;
   const userId = req.user._id;
 
   try {
-    if (!title || !description || !videoFile || !videoImageFile) {
+    if (!title || !description || !videoUrl || !videoImage || !duration) {
       return res.status(400).json({ message: "All fields are required" });
     }
-
-    const videoUploadResponse = await cloudinary.uploader.upload_large(
-      videoFile,
-      {
-        resource_type: "video",
-        folder: "Youtube_clone/videos",
-      }
-    );
-
-    const imageUploadResponse = await cloudinary.uploader.upload(
-      videoImageFile,
-      {
-        folder: "Youtube_clone/images",
-      }
-    );
 
     const newVideo = new Video({
       title,
       description,
-      videoUrl: videoUploadResponse.secure_url,
-      videoImage: imageUploadResponse.secure_url,
+      videoUrl,
+      videoImage,
       tags: tags || [],
       userId,
+      duration,
+      shorts,
     });
 
     await newVideo.save();
@@ -45,6 +32,8 @@ export const createVideo = async (req, res) => {
         videoUrl: newVideo.videoUrl,
         videoImage: newVideo.videoImage,
         tags: newVideo.tags,
+        duration: newVideo.duration,
+        shorts: newVideo.shorts,
         createdAt: newVideo.createdAt,
       },
     });
@@ -55,13 +44,17 @@ export const createVideo = async (req, res) => {
 };
 
 export const getVideos = async (req, res) => {
-  const { page = 1, limit = 10 } = req.query;
+  const { page = 1, limit = 9 } = req.query;
 
   try {
     const videos = await Video.find()
       .skip((page - 1) * limit)
       .limit(Number(limit))
-      .sort({ createdAt: -1 });
+      .sort({ createdAt: -1 })
+      .populate({
+        path: "userId",
+        select: "username profilePic",
+      });
 
     const totalVideos = await Video.countDocuments();
 
@@ -80,7 +73,10 @@ export const getVideos = async (req, res) => {
 export const getVideoById = async (req, res) => {
   const { id } = req.params;
   try {
-    const singleVideo = await Video.findById(id);
+    const singleVideo = await Video.findById(id).populate({
+      path: "userId",
+      select: "username profilePic",
+    });
 
     if (!singleVideo) {
       return res.status(404).json({ message: "Video not found" });

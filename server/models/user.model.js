@@ -37,6 +37,10 @@ const userSchema = new mongoose.Schema(
       ref: "User",
       default: [],
     },
+    followersCount: {
+      type: Number,
+      default: 0,
+    },
     about: {
       type: String,
       maxlength: 500,

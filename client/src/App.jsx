@@ -6,6 +6,9 @@ import LoginPage from "./pages/LoginPage";
 import { useAuthStore } from "../stores/authStore";
 import { Loader } from "lucide-react";
 import { Toaster } from "react-hot-toast";
+import MyChannel from "./pages/MyChannel";
+import CreateVideo from "./pages/CreateVideo";
+import Watch from "./pages/Watch";
 
 const App = () => {
   const { authUser, checkAuth, isLoading } = useAuthStore();
@@ -28,6 +31,9 @@ const App = () => {
         <Route path="/" element={<HomePage />} />
         <Route path="/register" element={<RegisterPage />} />
         <Route path="/login" element={<LoginPage />} />
+        <Route path="/my-channel" element={<MyChannel />} />
+        <Route path="/create-video" element={<CreateVideo />} />
+        <Route path="/watch/:id" element={<Watch />} />
       </Routes>
     </>
   );

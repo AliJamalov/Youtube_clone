@@ -64,6 +64,7 @@ export const login = async (req, res) => {
     res.status(200).json({
       _id: user._id,
       username: user.username,
+      profilePic: user.profilePic,
     });
   } catch (error) {
     res.status(500).json({ message: "Internal Server Error" });

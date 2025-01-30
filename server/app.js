@@ -7,10 +7,12 @@ import cookieParser from "cookie-parser";
 // Routes
 import authRouter from "./routes/auth.routes.js";
 import videoRouter from "./routes/video.routes.js";
+import userRouter from "./routes/user.routes.js";
 
 const app = express();
-app.use(express.json());
 app.use(cookieParser());
+app.use(express.json({ limit: "10mb" }));
+app.use(express.urlencoded({ limit: "10mb", extended: true }));
 
 dotenv.config();
 
@@ -24,7 +26,8 @@ app.use(
 );
 
 app.use("/api/auth", authRouter);
-app.use("/api/video", videoRouter);
+app.use("/api/videos", videoRouter);
+app.use("/api/user", userRouter);
 
 const PORT = process.env.PORT || 5000;
 const MONGODB_URL = process.env.MONGODB_URL;
