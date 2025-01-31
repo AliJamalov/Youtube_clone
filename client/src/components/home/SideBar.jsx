@@ -4,7 +4,7 @@ import { IoMdHome } from "react-icons/io";
 import { SiYoutubeshorts } from "react-icons/si";
 import { MdSubscriptions } from "react-icons/md";
 import { FaRegUserCircle } from "react-icons/fa";
-import { FaHistory } from "react-icons/fa";
+import { GoHistory } from "react-icons/go";
 import { AiOutlineYoutube } from "react-icons/ai";
 import { MdOutlineWatchLater } from "react-icons/md";
 import { AiOutlineLike } from "react-icons/ai";
@@ -118,11 +118,11 @@ const SideBar = ({ showMiniNavbar }) => {
                   : "flex gap-3 items-center bg-white hover:bg-gray-300 px-3 py-2 rounded-lg mt-1"
               }
             >
-              <FaHistory size={25} />
+              <GoHistory size={25} />
               <p className="text-[14px] font-medium text-black">History</p>
             </NavLink>
             <NavLink
-              to="/history"
+              to="/your-videos"
               className={({ isActive }) =>
                 isActive
                   ? "flex gap-3 items-center bg-gray-300 px-3 py-2 rounded-lg mt-1"
@@ -133,7 +133,7 @@ const SideBar = ({ showMiniNavbar }) => {
               <p className="text-[14px] font-medium text-black">Your videos</p>
             </NavLink>
             <NavLink
-              to="/watch-later"
+              to="/your-videos"
               className={({ isActive }) =>
                 isActive
                   ? "flex gap-3 items-center bg-gray-300 px-3 py-2 rounded-lg mt-1"

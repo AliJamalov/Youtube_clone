@@ -135,3 +135,20 @@ export const deleteVideo = async (req, res) => {
     res.status(500).json({ message: "Internal server error" });
   }
 };
+
+export const getVideosByUser = async (req, res) => {
+  const userId = req.user._id;
+
+  try {
+    const videos = await Video.find({ userId });
+
+    if (videos.length === 0) {
+      return res.status(404).json({ message: "No videos found" });
+    }
+
+    res.status(200).json(videos);
+  } catch (error) {
+    console.error("Error fetching user videos:", error);
+    res.status(500).json({ message: "Internal server error" });
+  }
+};

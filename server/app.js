@@ -8,6 +8,7 @@ import cookieParser from "cookie-parser";
 import authRouter from "./routes/auth.routes.js";
 import videoRouter from "./routes/video.routes.js";
 import userRouter from "./routes/user.routes.js";
+import commentRouter from "./routes/comment.routes.js";
 
 const app = express();
 app.use(cookieParser());
@@ -28,6 +29,7 @@ app.use(
 app.use("/api/auth", authRouter);
 app.use("/api/videos", videoRouter);
 app.use("/api/user", userRouter);
+app.use("/api/comments", commentRouter);
 
 const PORT = process.env.PORT || 5000;
 const MONGODB_URL = process.env.MONGODB_URL;

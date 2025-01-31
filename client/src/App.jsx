@@ -9,6 +9,7 @@ import { Toaster } from "react-hot-toast";
 import MyChannel from "./pages/MyChannel";
 import CreateVideo from "./pages/CreateVideo";
 import Watch from "./pages/Watch";
+import YourVideos from "./pages/YourVideos";
 
 const App = () => {
   const { authUser, checkAuth, isLoading } = useAuthStore();
@@ -34,6 +35,7 @@ const App = () => {
         <Route path="/my-channel" element={<MyChannel />} />
         <Route path="/create-video" element={<CreateVideo />} />
         <Route path="/watch/:id" element={<Watch />} />
+        <Route path="/your-videos" element={<YourVideos />} />
       </Routes>
     </>
   );

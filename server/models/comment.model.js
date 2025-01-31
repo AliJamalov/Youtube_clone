@@ -7,10 +7,15 @@ const commentSchema = new mongoose.Schema(
       ref: "User",
       required: true,
     },
+    videoId: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Video",
+      required: true,
+    },
     text: {
       type: String,
       required: true,
-      maxlength: 500, // Ограничение на длину комментария
+      maxlength: 500,
     },
     likes: {
       type: Number,

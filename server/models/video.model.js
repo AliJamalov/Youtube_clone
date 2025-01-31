@@ -50,11 +50,6 @@ const videoSchema = new mongoose.Schema(
       ref: "User",
       default: [],
     },
-    comments: {
-      type: [mongoose.Schema.Types.ObjectId],
-      ref: "Comment",
-      default: [],
-    },
     tags: {
       type: [String],
       default: [],

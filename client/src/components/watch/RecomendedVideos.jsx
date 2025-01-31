@@ -22,11 +22,19 @@ const RecomendedVideos = () => {
     fetchVideos();
   }, []);
 
+  const scrollView = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  };
+
   return (
     <div>
       {videos &&
         videos.map((video) => (
           <Link
+            onClick={scrollView}
             to={`/watch/${video._id}`}
             className="my-3 md:flex gap-2"
             key={video._id}

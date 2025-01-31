@@ -14,6 +14,13 @@ export const uploadToCloudinary = async (
     formData.append("folder", folder);
   }
 
+  formData.append(
+    "resource_type",
+    file.type.startsWith("video/") ? "video" : "image"
+  );
+  formData.append("fetch_format", "auto"); // Cloudinary сам выбирает лучший формат
+  formData.append("quality", "auto"); // Оптимизирует размер и качество
+
   try {
     const resourceType = file.type.startsWith("video/") ? "video" : "image";
 
